@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main(void) {
+    double a, b;               // double holds decimal values
+    printf("Enter two numbers separated by space: ");
+    if (scanf("%lf %lf", &a, &b) != 2) {  // %lf reads doubles
+        printf("Invalid input\n");
+        return 1;
+    }
+
+    // Arithmetic with doubles
+    printf("Addition: %.2f\n", a + b);
+    printf("Subtraction: %.2f\n", a - b);
+    printf("Multiplication: %.2f\n", a * b);
+
+    // Division - check for zero
+    if (b == 0.0) {
+        printf("Division: cannot divide by zero\n");
+    } else {
+        printf("Division: %.2f\n", a / b);
+    }
+
+    // Modulus only for integers. Convert to long long to avoid overflow for large ints.
+    long long ai = (long long)a;
+    long long bi = (long long)b;
+    if (bi == 0) {
+        printf("Modulus: cannot perform modulus by zero\n");
+    } else {
+        printf("Modulus (integer parts only): %lld\n", ai % bi);
+    }
+
+    return 0;
+}
