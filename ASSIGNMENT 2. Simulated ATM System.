@@ -1,0 +1,168 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+// Global variables 
+#define MAX_ATTEMPTS 3
+#define CORRECT_PIN 7373  // Default PIN for the account
+float accountBalance = 545650.00;  // Initial account balance
+
+// Function prototypes
+bool login();
+void displayMenu();
+void checkBalance();
+void deposit(float amount);
+void withdraw(float amount);
+bool isValidAmount(float amount);
+bool isSufficientBalance(float amount);
+
+// Main function
+int main() {
+    printf("\n");
+    printf("     WELCOME TO SIMULATED ATM\n");
+    printf("\n");
+    
+    // Step 1: Login / PIN Verification
+    if (!login()) {
+        printf("\n\n");
+        printf("  ACCESS DENIED. Too many attempts.\n");
+        printf("\n");
+        return 0;
+    }
+    
+    printf("\n");
+    printf("        LOGIN SUCCESSFUL!\n");
+    printf("\n");
+    
+    // Step 2: Main ATM loop
+    int choice;
+    float amount;
+    bool continueTransactions = true;
+    
+    while (continueTransactions) {
+        displayMenu();
+        printf("Enter your choice : ");
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1:  // Balance Inquiry
+                checkBalance();
+                break;
+                
+            case 2:  // Deposit
+                printf("\n DEPOSIT \n");
+                printf("Enter amount to deposit: $");
+                scanf("%f", &amount);
+                
+                if (isValidAmount(amount)) {
+                    deposit(amount);
+                } else {
+                    printf("\nERROR: Invalid amount! Please enter a positive number.\n");
+                }
+                break;
+                
+            case 3:  // Withdraw
+                printf("\n WITHDRAWAL\n");
+                printf("Enter amount to withdraw: $");
+                scanf("%f", &amount);
+                
+                if (!isValidAmount(amount)) {
+                    printf("\nERROR: Invalid amount! Please enter a positive number.\n");
+                } else if (!isSufficientBalance(amount)) {
+                    printf("\nERROR: Insufficient funds! Your balance is $%.2f\n", accountBalance);
+                } else {
+                    withdraw(amount);
+                }
+                break;
+                
+            case 4:  // Exit
+                printf("\n");
+                printf("  Thank you for using our ATM!\n");
+                printf("        Have a nice day!\n");
+                printf("\n");
+                continueTransactions = false;
+                break;
+                
+            default:  // Invalid choice
+                printf("\nERROR: Invalid choice! Please select 1-4.\n");
+                break;
+        }
+        
+        // Pause to let user read the output before showing menu again
+        if (choice != 4) {
+            printf("\nPress Enter to continue...");
+            getchar();  // Clear newline from previous input
+            getchar();  // Wait for Enter key
+        }
+    }
+    
+    return 0;
+}
+
+// Function 1: Login / PIN Verification
+bool login() {
+    int enteredPIN;
+    int attempts = 0;
+    
+    printf("Please enter your 4-digit PIN: ");
+    
+    while (attempts < MAX_ATTEMPTS) {
+        scanf("%d", &enteredPIN);
+        
+        if (enteredPIN == CORRECT_PIN) {
+            return true;  // Login successful
+        } else {
+            attempts++;
+            int remaining = MAX_ATTEMPTS - attempts;
+            
+            if (remaining > 0) {
+                printf("Incorrect PIN. You have %d attempt(s) remaining.\n", remaining);
+                printf("Please try again: ");
+            }
+        }
+    }
+    
+    return false;  // Maximum attempts exceeded
+}
+
+// Function 2: Display ATM Menu
+void displayMenu() {
+    printf("\n");
+    printf("            ATM MENU\n");
+    printf("\n");
+    printf("1. Balance Inquiry\n");
+    printf("2. Deposit Money\n");
+    printf("3. Withdraw Money\n");
+    printf("4. Exit\n");
+    printf("\n");
+}
+
+// Function 3: Check Balance
+void checkBalance() {
+    printf("\n ACCOUNT BALANCE\n");
+    printf("Your current balance is: $%.2f\n", accountBalance);
+}
+
+// Function 4: Deposit Money
+void deposit(float amount) {
+    accountBalance += amount;
+    printf("\nSUCCESS: $%.2f has been deposited to your account.\n", amount);
+    printf("Your new balance is: $%.2f\n", accountBalance);
+}
+
+// Function 5: Withdraw Money
+void withdraw(float amount) {
+    accountBalance -= amount;
+    printf("\nSUCCESS: $%.2f has been withdrawn from your account.\n", amount);
+    printf("Your new balance is: $%.2f\n", accountBalance);
+}
+
+// Function 6: Validate Amount (positive number)
+bool isValidAmount(float amount) {
+    return (amount > 0);
+}
+
+// Function 7: Check Sufficient Balance
+bool isSufficientBalance(float amount) {
+    return (amount <= accountBalance);
+}
