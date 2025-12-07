@@ -19,7 +19,7 @@ bool isSufficientBalance(float amount);
 // Main function
 int main() {
     printf("\n");
-    printf("     WELCOME TO SIMULATED ATM\n");
+    printf("     WELCOME \n");
     printf("\n");
     
     // Step 1: Login / PIN Verification
