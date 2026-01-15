@@ -1,21 +1,25 @@
 #include <stdio.h>
 
-void incrementByValue(int x) {
-    x++;
-}
-
-void incrementByReference(int *x) {
-    (*x)++;
-}
-
 int main() {
-    int num = 10;
+    int i, j;
 
-    incrementByValue(num);
-    printf("After pass by value: %d\n", num);
+    int arr[6][4] = {
+        {1,  2,  3,  4},
+        {5,  6,  7,  8},
+        {9, 10, 11, 12},
+        {13,14, 15, 16},
+        {17,18, 19, 20},
+        {21,22, 23, 24}
+    };
 
-    incrementByReference(&num);
-    printf("After pass by reference: %d\n", num);
+    printf("Elements of the 2D array are:\n");
+
+    for(i = 0; i < 6; i++) {
+        for(j = 0; j < 4; j++) {
+            printf("%4d", arr[i][j]);
+        }
+        printf("\n");
+    }
 
     return 0;
 }
