@@ -1,24 +1,28 @@
 #include <stdio.h>
 
 int main() {
-    int i, j;
+    int n, i, j;
+    int marks[100];
+    int count;
+    printf("Enter the number of students in the class: ");
+    scanf("%d", &n);
 
-    int arr[6][4] = {
-        {1,  2,  3,  4},
-        {5,  6,  7,  8},
-        {9, 10, 11, 12},
-        {13,14, 15, 16},
-        {17,18, 19, 20},
-        {21,22, 23, 24}
-    };
-
-    printf("Elements of the 2D array are:\n");
-
-    for(i = 0; i < 6; i++) {
-        for(j = 0; j < 4; j++) {
-            printf("%4d", arr[i][j]);
+    printf("Enter the marks for %d students:\n", n);
+    for(i = 0; i < n; i++) {
+        printf("Student - %d : ", i+1);
+        scanf("%d", &marks[i]);
+    }
+    printf("\nThe unique marks found are: ");
+    for(i = 0; i < n; i++) {
+        count = 0;
+        for(j = 0; j < n; j++) {
+            if(marks[i] == marks[j]) {
+                count++;
+            }
         }
-        printf("\n");
+        if(count == 1) {
+            printf("%d ", marks[i]);
+        }
     }
 
     return 0;
