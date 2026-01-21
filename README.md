@@ -1,7 +1,7 @@
 1. Difference Between Normal Variable and Pointer
 
 Normal Variable:
-- Stores an actual data value (e.g., 10, 'A', 3.14)
+- Stores an actual data value (e.g., 10, 'A', 3.14).
 - Memory access: Direct - the variable name refers directly to its stored value
 - Reading: Simply use the variable name (e.g., `x` gives you the value)
 - Modifying: Assign new value directly (e.g., `x = 20`)
