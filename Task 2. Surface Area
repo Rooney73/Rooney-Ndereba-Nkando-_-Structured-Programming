@@ -1,25 +1,23 @@
-#include <stdio.h>        // Allows use of printf() and scanf()
+#include <stdio.h>        
 
-int main(void) {          // Program entry point
+int main(void) {          
 
-    const double PI = 3.141592653589793;   // Define the constant PI
-    double r;                              // Variable to store radius
+    const double PI = 3.141592653589793;   
+    double r;                             
 
     // Ask the user for the radius
     printf("Enter the radius of the sphere: ");
-    scanf("%lf", &r);                       // Read a double value into r
+    scanf("%lf", &r);                   
 
     // Check if the radius is negative
     if (r < 0) {
         printf("Radius cannot be negative.\n");
-        return 0;                           // End the program early
+        return 0;                       
     }
 
-    // Calculate the surface area using the formula
     double surface_area = 4 * PI * r * r;
 
-    // Display the result
     printf("Surface Area = %.3f\n", surface_area);
 
-    return 0;                                // End of program
+    return 0;                           
 }
