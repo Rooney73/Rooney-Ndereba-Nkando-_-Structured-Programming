@@ -1,25 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 
-int main(void) {
-    char name[100];                // reserve space for the string
+int main() {
+    char name[50];
+
 
     printf("Enter your name: ");
-    // Use fgets to allow spaces. fgets reads at most sizeof(name)-1 chars and appends '\0'
-    if (fgets(name, sizeof(name), stdin) == NULL) {
-        printf("Error reading input\n");
-        return 1;
-    }
-
-    // Remove trailing newline if present
-    size_t len = strlen(name);
-    if (len > 0 && name[len - 1] == '\n') {
-        name[len - 1] = '\0';
-        len--; // update length
-    }
+    scanf("%s", name);
 
     printf("You entered: %s\n", name);
-    printf("Length: %zu characters\n", len);
+    printf("Length of the string: %lu\n", strlen(name));
 
     return 0;
 }
