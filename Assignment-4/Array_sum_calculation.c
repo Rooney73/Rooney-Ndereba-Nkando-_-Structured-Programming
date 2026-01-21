@@ -1,29 +1,21 @@
 #include <stdio.h>
 
 int main() {
-    int n, i, j;
-    int marks[100];
-    int count;
-    printf("Enter the number of students in the class: ");
+    int n, i;
+    int arr[100];
+    int sum = 0;
+
+    printf("Input the number of elements to be stored in the array : ");
     scanf("%d", &n);
 
-    printf("Enter the marks for %d students:\n", n);
+    printf("Input %d elements in the array :\n", n);
     for(i = 0; i < n; i++) {
-        printf("Student - %d : ", i+1);
-        scanf("%d", &marks[i]);
+        printf("element - %d : ", i);
+        scanf("%d", &arr[i]);
+        sum = sum + arr[i];
     }
-    printf("\nThe unique marks found are: ");
-    for(i = 0; i < n; i++) {
-        count = 0;
-        for(j = 0; j < n; j++) {
-            if(marks[i] == marks[j]) {
-                count++;
-            }
-        }
-        if(count == 1) {
-            printf("%d ", marks[i]);
-        }
-    }
+
+    printf("Sum of all elements stored in the array is : %d\n", sum);
 
     return 0;
 }
